@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Budget Semplice</title>
+<title>Budget App</title>
 
 <style>
 body{
@@ -26,12 +26,13 @@ body{
   box-shadow:0 5px 15px rgba(0,0,0,0.05);
 }
 
-h1{margin-top:0}
+h1,h2{margin-top:0}
 
-input,select,button{
+input,button{
   padding:10px;
   border-radius:8px;
   border:1px solid #ddd;
+  margin:5px 0;
 }
 
 button{
@@ -39,6 +40,10 @@ button{
   color:white;
   border:none;
   cursor:pointer;
+}
+
+button:hover{
+  opacity:0.9;
 }
 
 table{
@@ -50,6 +55,7 @@ table{
 td,th{
   padding:10px;
   border-bottom:1px solid #eee;
+  text-align:left;
 }
 </style>
 </head>
@@ -61,11 +67,11 @@ td,th{
 <div class="card">
 <h1>💰 Budget Mensile</h1>
 
-<label>Stipendio</label>
-<input id="salary" type="number"><br><br>
+<label>Stipendio</label><br>
+<input id="salary" type="number"><br>
 
-<label>Entrate extra</label>
-<input id="extra" type="number"><br><br>
+<label>Entrate extra</label><br>
+<input id="extra" type="number"><br>
 
 <button onclick="saveData()">Salva</button>
 </div>
@@ -73,10 +79,10 @@ td,th{
 <div class="card">
 <h2>➕ Aggiungi spesa</h2>
 
-<input id="desc" placeholder="Descrizione">
-<input id="amount" type="number" placeholder="€">
+<input id="desc" placeholder="Descrizione"><br>
+<input id="amount" type="number" placeholder="Importo €"><br>
 
-<button onclick="addExpense()">Aggiungi</button>
+<button onclick="addExpense()">Aggiungi spesa</button>
 </div>
 
 <div class="card">
@@ -88,7 +94,7 @@ td,th{
 </div>
 
 <div class="card">
-<h2>📋 Spese</h2>
+<h2>📋 Lista spese</h2>
 
 <table>
 <thead>
@@ -113,10 +119,13 @@ let data = JSON.parse(localStorage.getItem("budget")) || {
   expenses:[]
 };
 
+function save(){
+  localStorage.setItem("budget", JSON.stringify(data));
+}
+
 function saveData(){
   data.salary = Number(document.getElementById("salary").value);
   data.extra = Number(document.getElementById("extra").value);
-
   save();
   render();
 }
@@ -125,7 +134,10 @@ function addExpense(){
   const desc = document.getElementById("desc").value;
   const amount = Number(document.getElementById("amount").value);
 
-  if(!desc || amount<=0) return;
+  if(!desc || amount <= 0){
+    alert("Inserisci dati validi");
+    return;
+  }
 
   data.expenses.push({desc,amount});
 
@@ -136,14 +148,10 @@ function addExpense(){
   render();
 }
 
-function deleteExpense(i){
-  data.expenses.splice(i,1);
+function deleteExpense(index){
+  data.expenses.splice(index,1);
   save();
   render();
-}
-
-function save(){
-  localStorage.setItem("budget", JSON.stringify(data));
 }
 
 function render(){
@@ -151,7 +159,9 @@ function render(){
   document.getElementById("salary").value = data.salary;
   document.getElementById("extra").value = data.extra;
 
-  let totalExpenses = data.expenses.reduce((s,e)=>s+e.amount,0);
+  let totalExpenses = 0;
+  data.expenses.forEach(e => totalExpenses += e.amount);
+
   let income = data.salary + data.extra;
   let remaining = income - totalExpenses;
 
@@ -159,7 +169,7 @@ function render(){
   document.getElementById("expenses").innerText = totalExpenses;
   document.getElementById("remaining").innerText = remaining;
 
-  let html="";
+  let html = "";
   data.expenses.forEach((e,i)=>{
     html += `
       <tr>
