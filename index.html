@@ -3,127 +3,179 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Budget Finanza</title>
+<title>Budget Semplice</title>
+
 <style>
-:root{--bg:#f4f7fb;--surface:#fff;--line:#dbe4f0;--text:#0f172a;--muted:#475569;--blue:#2563eb;--blueSoft:#dbeafe;--blueLite:#93c5fd;--green:#16a34a;--greenSoft:#dcfce7;--orange:#d97706;--orangeSoft:#ffedd5;--violet:#7c3aed;--violetSoft:#ede9fe;--red:#dc2626;--redSoft:#fee2e2;--shadow:0 12px 30px rgba(15,23,42,.08)}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
-.container{max-width:1560px;margin:0 auto;padding:20px}.hero{background:linear-gradient(135deg,#0f3fa8 0%,#2563eb 100%);color:#fff;border-radius:26px;padding:24px;box-shadow:var(--shadow);margin-bottom:18px}.hero-top{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}.hero h1{margin:0 0 8px;font-size:32px}.hero p{margin:0;color:rgba(255,255,255,.92)}.top-actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}.toolbar{display:grid;grid-template-columns:repeat(4,1fr) auto auto;gap:12px;margin-top:18px;align-items:end}
-.field{display:flex;flex-direction:column;gap:6px}label{font-size:12px;font-weight:900;color:var(--muted)}.hero label{color:rgba(255,255,255,.92)}input,select,button{font:inherit}input,select{width:100%;min-height:44px;border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:#fff;color:var(--text)}.hero input,.hero select{background:rgba(255,255,255,.98)}button{min-height:44px;border:0;border-radius:12px;padding:10px 14px;font-weight:900;cursor:pointer}.btn-light{background:#fff;color:#0f3fa8}.btn-soft{background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.28)}.btn-ghost{background:var(--blueSoft);color:var(--blue)}.btn-success{background:var(--greenSoft);color:var(--green)}.btn-danger{background:var(--redSoft);color:var(--red)}.btn-mini{min-height:30px;padding:5px 9px;font-size:12px}
-.nav{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.nav-btn{background:#fff;border:1px solid #dfe7f3;border-radius:16px;padding:14px 12px;font-weight:900;box-shadow:var(--shadow)}.nav-btn.active{background:var(--blue);color:#fff}
-.page{display:none}.page.active{display:block}.card{background:var(--surface);border:1px solid #e7eef8;border-radius:22px;padding:18px;box-shadow:var(--shadow)}.section-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.section-title h2,.section-title h3{margin:0;font-size:22px}.actions{display:flex;gap:8px;flex-wrap:wrap}
-.summary-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:18px}.summary-card{background:#fff;border:1px solid #e8eef8;border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}.summary-head{padding:12px 14px;font-size:13px;font-weight:900;text-transform:uppercase;background:var(--blueSoft);color:var(--blue)}.summary-head.green{background:var(--greenSoft);color:var(--green)}.summary-head.orange{background:var(--orangeSoft);color:var(--orange)}.summary-head.violet{background:var(--violetSoft);color:var(--violet)}.summary-body{padding:16px 14px}.money{font-size:29px;font-weight:900;margin-bottom:6px}.muted{font-size:13px;color:var(--muted)}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}.kpi{background:#f8fbff;border:1px solid #e7eef8;border-radius:18px;padding:14px}.kpi .title{font-size:12px;font-weight:900;color:var(--muted);text-transform:uppercase}.kpi .value{font-size:25px;font-weight:900;margin-top:6px}.kpi.remaining{background:#eff6ff}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.charts{display:grid;grid-template-columns:1fr;gap:18px}.chart-card{height:320px}canvas{width:100%;height:100%;display:block}.small{font-size:12px;color:var(--muted)}
-table{width:100%;border-collapse:collapse}th,td{padding:10px 8px;border-bottom:1px solid #edf2f7;text-align:left;vertical-align:middle}th{font-size:12px;color:var(--muted);text-transform:uppercase}.category-row{background:#f8fbff;font-weight:800}.subcategory-name{padding-left:22px}.pill{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:900}.pill.ok{background:var(--greenSoft);color:var(--green)}.pill.bad{background:var(--redSoft);color:var(--red)}
-.expense-form{display:grid;grid-template-columns:1.1fr .7fr .9fr .9fr 1.2fr auto;gap:10px;align-items:end;margin-bottom:14px}.tracker-card,.goal-card{border:1px solid #e8eef8;border-radius:20px;padding:14px;background:#fff}.tracker-top,.goal-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}.tracker-grid,.goal-grid,.withdraw-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.progress{height:12px;background:#e8eef8;border-radius:999px;overflow:hidden;margin-top:10px}.progress>div{height:100%;background:linear-gradient(90deg,var(--blue),var(--green))}.readonly{background:#f8fafc}.tag{display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;background:#f1f5f9;font-size:12px;font-weight:800;color:#334155}
-@media(max-width:1280px){.summary-grid{grid-template-columns:repeat(2,1fr)}.hero-top,.grid-2,.toolbar,.expense-form,.tracker-grid,.goal-grid,.withdraw-grid,.kpis,.nav{grid-template-columns:1fr 1fr}}@media(max-width:760px){.container{padding:12px}.summary-grid,.toolbar,.expense-form,.tracker-grid,.goal-grid,.withdraw-grid,.kpis,.nav{grid-template-columns:1fr}.hero h1{font-size:26px}.money{font-size:25px}}
+body{
+  font-family: Arial;
+  background:#f4f6fb;
+  margin:0;
+  padding:20px;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  margin-bottom:20px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+h1{margin-top:0}
+
+input,select,button{
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ddd;
+}
+
+button{
+  background:#2563eb;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+
+td,th{
+  padding:10px;
+  border-bottom:1px solid #eee;
+}
 </style>
 </head>
+
 <body>
+
 <div class="container">
-<section class="hero"><div class="hero-top"><div><h1>Budget & Patrimonio</h1><p>4 pagine: riepilogo con grafici, budget e spese, patrimonio con versamenti del mese corrente, movimenti e prelievi.</p></div><div class="top-actions"><button class="btn-light" id="btnSave">Salva</button><button class="btn-soft" id="btnExport">Esporta JSON</button><button class="btn-soft" id="btnImport">Importa JSON</button><input hidden id="importFile" type="file" accept="application/json"></div></div><div class="toolbar"><div class="field"><label>Mese</label><input id="monthSelect" type="month"></div><div class="field"><label>Stipendio</label><input id="salaryInput" type="number" step="0.01"></div><div class="field"><label>Entrate extra</label><input id="extraIncomeInput" type="number" step="0.01"></div><div class="field"><label>Avanzo mese precedente</label><input id="carryOverInput" type="number" step="0.01"></div><button class="btn-light" id="btnResetMonth">Reset mese</button><div></div></div></section>
-<nav class="nav"><button class="nav-btn active" data-page="overview">1. Riepilogo</button><button class="nav-btn" data-page="budget">2. Budget & Spese</button><button class="nav-btn" data-page="wealth">3. Patrimonio & Obiettivi</button><button class="nav-btn" data-page="flows">4. Movimenti</button></nav>
-<section id="page-overview" class="page active"><div class="summary-grid"><article class="summary-card"><div class="summary-head">Saldo accantonamenti</div><div class="summary-body"><div class="money" id="summaryAcc">€ 0,00</div><div class="muted">Totale degli obiettivi.</div></div></article><article class="summary-card"><div class="summary-head">Risparmi</div><div class="summary-body"><div class="money" id="summarySav">€ 0,00</div><div class="muted">Liquidità + obiettivi.</div></div></article><article class="summary-card"><div class="summary-head orange">Investimenti lordi</div><div class="summary-body"><div class="money" id="summaryInv">€ 0,00</div><div class="muted">Saldo cumulato investimenti.</div></div></article><article class="summary-card"><div class="summary-head violet">Criptovalute lordi</div><div class="summary-body"><div class="money" id="summaryCry">€ 0,00</div><div class="muted">Saldo cumulato crypto.</div></div></article><article class="summary-card"><div class="summary-head green">Patrimonio netto</div><div class="summary-body"><div class="money" id="summaryNet">€ 0,00</div><div class="muted">Risparmi + investimenti + crypto.</div></div></article></div><div class="kpis"><div class="kpi"><div class="title">Entrate del mese</div><div class="value" id="incomeTotal">€ 0,00</div></div><div class="kpi"><div class="title">Budget pianificato</div><div class="value" id="plannedTotal">€ 0,00</div></div><div class="kpi remaining"><div class="title">Budget rimanente</div><div class="value" id="remainingTotal">€ 0,00</div></div><div class="kpi"><div class="title">Spesa effettiva</div><div class="value" id="actualTotal">€ 0,00</div></div></div><div class="charts"><article class="card chart-card"><div class="section-title"><h3>Previsto vs effettivo per categoria</h3></div><canvas id="budgetChart" width="1200" height="260"></canvas></article><article class="card chart-card"><div class="section-title"><h3>Composizione patrimonio</h3></div><canvas id="wealthChart" width="1200" height="300"></canvas></article><article class="card chart-card"><div class="section-title"><h3>Versamenti del mese corrente</h3></div><canvas id="flowChart" width="1200" height="260"></canvas></article></div></section>
-<section id="page-budget" class="page"><div class="card" style="margin-bottom:18px"><div class="section-title"><h2>Budget mensile</h2><div class="actions"><button class="btn-ghost" id="addCategoryBtn">+ Categoria</button><button class="btn-ghost" id="addSubcategoryBtn">+ Sottocategoria</button></div></div><div style="overflow:auto"><table><thead><tr><th>Voce</th><th>Previsto</th><th>Effettivo</th><th>Differenza</th><th>Azioni</th></tr></thead><tbody id="budgetTableBody"></tbody></table></div></div><div class="card"><div class="section-title"><h2>Spese registrate</h2></div><div class="expense-form"><div class="field"><label>Spesa</label><input id="expenseDescription" placeholder="Es. Pizza"></div><div class="field"><label>XX €</label><input id="expenseAmount" type="number" step="0.01"></div><div class="field"><label>Categoria</label><select id="expenseCategory"></select></div><div class="field"><label>Sottocategoria</label><select id="expenseSubcategory"></select></div><div class="field"><label>Note</label><input id="expenseNote"></div><button class="btn-success" id="addExpenseBtn">Inserisci</button></div><div style="overflow:auto;max-height:420px"><table><thead><tr><th>Spesa</th><th>€</th><th>Categoria</th><th>Sottocategoria</th><th>Note</th><th>Azioni</th></tr></thead><tbody id="expensesTableBody"></tbody></table></div></div></section>
-<section id="page-wealth" class="page"><div class="grid-2"><div class="card"><div class="section-title"><h2>Risparmi, investimenti e crypto</h2></div><div id="trackersContainer" style="display:flex;flex-direction:column;gap:14px"></div></div><div class="card"><div class="section-title"><h2>Obiettivi</h2><div class="actions"><button class="btn-ghost" id="addGoalBtn">+ Obiettivo</button></div></div><div id="goalsContainer" style="display:flex;flex-direction:column;gap:14px"></div></div></div></section>
-<section id="page-flows" class="page"><div class="grid-2"><div class="card"><div class="section-title"><h2>Riepilogo movimenti del mese</h2></div><table><tbody id="monthlySummary"></tbody></table><div class="section-title" style="margin-top:16px"><h3>Preleva da obiettivo</h3></div><div class="withdraw-grid"><div class="field"><label>Voce da prelevare</label><select id="withdrawGoal"></select></div><div class="field"><label>Importo</label><input id="withdrawAmount" type="number" step="0.01"></div><div class="field"><label>Nota</label><input id="withdrawNote"></div></div><div style="margin-top:10px"><button class="btn-danger" id="addWithdrawBtn">Preleva</button></div><table><thead><tr><th>Obiettivo</th><th>Importo</th><th>Nota</th><th>Azioni</th></tr></thead><tbody id="withdrawalsTableBody"></tbody></table></div><div class="card"><div class="section-title"><h2>Preleva dal risparmio</h2></div><div class="withdraw-grid"><div class="field"><label>Voce</label><input class="readonly" value="Risparmi / Liquidità" disabled></div><div class="field"><label>Importo</label><input id="cashWithdrawAmount" type="number" step="0.01"></div><div class="field"><label>Nota</label><input id="cashWithdrawNote"></div></div><div style="margin-top:10px"><button class="btn-danger" id="addCashWithdrawBtn">Preleva</button></div><table><thead><tr><th>Voce</th><th>Importo</th><th>Nota</th><th>Azioni</th></tr></thead><tbody id="cashWithdrawTableBody"></tbody></table></div></div><div class="card" style="margin-top:18px"><div class="section-title"><h2>Grafici movimenti mensili</h2></div><div class="charts"><article class="card chart-card" style="box-shadow:none;border:1px solid #edf2f7"><div class="section-title"><h3>Allocazioni mensili per voce</h3></div><canvas id="monthlyStackChart" width="1200" height="320"></canvas></article><article class="card chart-card" style="box-shadow:none;border:1px solid #edf2f7"><div class="section-title"><h3>Saldo cumulato per voce</h3></div><canvas id="monthlyBalanceChart" width="1200" height="320"></canvas></article></div></div></section>
+
+<div class="card">
+<h1>💰 Budget Mensile</h1>
+
+<label>Stipendio</label>
+<input id="salary" type="number"><br><br>
+
+<label>Entrate extra</label>
+<input id="extra" type="number"><br><br>
+
+<button onclick="saveData()">Salva</button>
 </div>
+
+<div class="card">
+<h2>➕ Aggiungi spesa</h2>
+
+<input id="desc" placeholder="Descrizione">
+<input id="amount" type="number" placeholder="€">
+
+<button onclick="addExpense()">Aggiungi</button>
+</div>
+
+<div class="card">
+<h2>📊 Riepilogo</h2>
+
+<p><b>Entrate:</b> <span id="income">0</span> €</p>
+<p><b>Spese:</b> <span id="expenses">0</span> €</p>
+<p><b>Rimanente:</b> <span id="remaining">0</span> €</p>
+</div>
+
+<div class="card">
+<h2>📋 Spese</h2>
+
+<table>
+<thead>
+<tr>
+<th>Descrizione</th>
+<th>€</th>
+<th></th>
+</tr>
+</thead>
+<tbody id="table"></tbody>
+</table>
+
+</div>
+
+</div>
+
 <script>
-const STORAGE_KEY='budget_finanza_persistent_v1';
-function uid(){return Math.random().toString(36).slice(2,10)}
-function clone(o){return JSON.parse(JSON.stringify(o))}
-function q(id){return document.getElementById(id)}
-function num(v){const n=parseFloat(v);return Number.isFinite(n)?n:0}
-function euro(n){return new Intl.NumberFormat('it-IT',{style:'currency',currency:'EUR'}).format(Number(n||0))}
-function esc(s){return String(s).replace(/[&<>\"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
-function todayMonth(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`}
-const defaultMonth=()=>({stipendio:0,entrateExtra:0,avanzoPrecedente:0,categories:[{id:uid(),name:'Alimentazione',subcategories:[{id:uid(),name:'Spesa',planned:0,actual:0},{id:uid(),name:'Pizza / cene',planned:0,actual:0}]},{id:uid(),name:'Trasporti',subcategories:[{id:uid(),name:'Benzina',planned:0,actual:0},{id:uid(),name:'Auto',planned:0,actual:0}]},{id:uid(),name:'Tempo libero',subcategories:[{id:uid(),name:'Uscite',planned:0,actual:0},{id:uid(),name:'Sport',planned:0,actual:0}]}],expenses:[],allocations:{liquidity:0,investments:0,crypto:0,goals:{}},withdrawals:[],cashWithdrawals:[]})
-const defaultState={budget:{},goals:[{id:uid(),name:'Fondo macchina',target:10000},{id:uid(),name:'Altro obiettivo',target:3000}]}
-async function load(){
-  const raw = localStorage.getItem(STORAGE_KEY);
-  if(!raw) return clone(defaultState);
-  try{
-    return JSON.parse(raw)
-  }catch{
-    return clone(defaultState)
-  }
-}
-    if (res.ok) {
-      const data = await res.json();
-      if (data && Object.keys(data).length) return data;
-    }
-  } catch (e) {}
-  const raw=localStorage.getItem(STORAGE_KEY);
-  if(!raw) return clone(defaultState);
-  try{return JSON.parse(raw)}catch{return clone(defaultState)}
-}
-let state;
-const els={monthSelect:q('monthSelect'),salaryInput:q('salaryInput'),extraIncomeInput:q('extraIncomeInput'),carryOverInput:q('carryOverInput'),summaryAcc:q('summaryAcc'),summarySav:q('summarySav'),summaryInv:q('summaryInv'),summaryCry:q('summaryCry'),summaryNet:q('summaryNet'),incomeTotal:q('incomeTotal'),plannedTotal:q('plannedTotal'),remainingTotal:q('remainingTotal'),actualTotal:q('actualTotal'),budgetTableBody:q('budgetTableBody'),expenseDescription:q('expenseDescription'),expenseAmount:q('expenseAmount'),expenseCategory:q('expenseCategory'),expenseSubcategory:q('expenseSubcategory'),expenseNote:q('expenseNote'),expensesTableBody:q('expensesTableBody'),trackersContainer:q('trackersContainer'),goalsContainer:q('goalsContainer'),monthlySummary:q('monthlySummary'),withdrawGoal:q('withdrawGoal'),withdrawAmount:q('withdrawAmount'),withdrawNote:q('withdrawNote'),withdrawalsTableBody:q('withdrawalsTableBody'),cashWithdrawAmount:q('cashWithdrawAmount'),cashWithdrawNote:q('cashWithdrawNote'),cashWithdrawTableBody:q('cashWithdrawTableBody')};
-function save(){
-  try{
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-  }catch(e){}
-}
-function allMonths(){return Object.keys(state.budget).sort()}
-function currentMonthKey(){return els.monthSelect.value||todayMonth()}
-function prevExisting(month){const prev=allMonths().filter(m=>m<month); return prev.length?prev[prev.length-1]:null}
-function ensureMonth(month){if(!state.budget[month]){const prev=prevExisting(month); if(prev){const c=clone(state.budget[prev]); c.stipendio=0;c.entrateExtra=0;c.avanzoPrecedente=0;c.expenses=[];c.withdrawals=[];c.cashWithdrawals=[]; c.categories.forEach(cat=>cat.subcategories.forEach(s=>s.actual=0)); c.allocations={liquidity:0,investments:0,crypto:0,goals:{}}; state.goals.forEach(g=>c.allocations.goals[g.id]=0); state.budget[month]=c;} else {state.budget[month]=defaultMonth(); state.goals.forEach(g=>state.budget[month].allocations.goals[g.id]=0); } }}
-function monthData(){const m=currentMonthKey(); ensureMonth(m); return state.budget[m]}
-function futureMonths(from){return allMonths().filter(m=>m>from)}
-function propagateCategoryForward(cat){futureMonths(currentMonthKey()).forEach(m=>{const d=state.budget[m]; if(!d.categories.some(c=>c.id===cat.id)) d.categories.push(clone(cat))})}
-function propagateSubForward(catId,sub){futureMonths(currentMonthKey()).forEach(m=>{const d=state.budget[m]; const cat=d.categories.find(c=>c.id===catId); if(cat && !cat.subcategories.some(s=>s.id===sub.id)) cat.subcategories.push(clone(sub))})}
-function goalBalance(id){let sum=0; allMonths().forEach(m=>{sum+=num(state.budget[m].allocations.goals[id]); (state.budget[m].withdrawals||[]).forEach(w=>{if(w.goalId===id) sum-=num(w.amount)})}); return sum}
-function liquidityBalance(){let sum=0; allMonths().forEach(m=>{sum+=num(state.budget[m].allocations.liquidity); (state.budget[m].cashWithdrawals||[]).forEach(w=>sum-=num(w.amount))}); return sum}
-function investmentsBalance(){let sum=0; allMonths().forEach(m=>sum+=num(state.budget[m].allocations.investments)); return sum}
-function cryptoBalance(){let sum=0; allMonths().forEach(m=>sum+=num(state.budget[m].allocations.crypto)); return sum}
-function accBalance(){return state.goals.reduce((s,g)=>s+goalBalance(g.id),0)}
-function rebuildActuals(){const m=monthData(); m.categories.forEach(c=>c.subcategories.forEach(s=>s.actual=0)); (m.expenses||[]).forEach(e=>{const c=m.categories.find(x=>x.id===e.categoryId); const s=c?.subcategories.find(x=>x.id===e.subcategoryId); if(s) s.actual+=num(e.amount)})}
-function totals(){const m=monthData(); let planned=0,actual=0; const byCat=m.categories.map(c=>{const p=c.subcategories.reduce((s,x)=>s+num(x.planned),0); const a=c.subcategories.reduce((s,x)=>s+num(x.actual),0); planned+=p; actual+=a; return {name:c.name,planned:p,actual:a}}); const income=num(m.stipendio)+num(m.entrateExtra)+num(m.avanzoPrecedente); const remaining=income-actual; const acc=accBalance(), liq=liquidityBalance(), inv=investmentsBalance(), cry=cryptoBalance(); return {income,planned,actual,remaining,acc,liq,sav:liq+acc,inv,cry,net:liq+acc+inv+cry,byCat}}
-function render(){const m=monthData(), t=totals(); els.salaryInput.value=m.stipendio; els.extraIncomeInput.value=m.entrateExtra; els.carryOverInput.value=m.avanzoPrecedente; els.summaryAcc.textContent=euro(t.acc); els.summarySav.textContent=euro(t.sav); els.summaryInv.textContent=euro(t.inv); els.summaryCry.textContent=euro(t.cry); els.summaryNet.textContent=euro(t.net); els.incomeTotal.textContent=euro(t.income); els.plannedTotal.textContent=euro(t.planned); els.remainingTotal.textContent=euro(t.remaining); els.actualTotal.textContent=euro(t.actual); renderBudget(); renderExpenseSelectors(); renderExpenses(); renderTrackers(); renderGoals(); renderSummary(); renderWithdrawals(); drawCharts(); save()}
-function renderBudget(){els.budgetTableBody.innerHTML=''; monthData().categories.forEach(cat=>{const cp=cat.subcategories.reduce((s,x)=>s+num(x.planned),0), ca=cat.subcategories.reduce((s,x)=>s+num(x.actual),0), diff=cp-ca; const r=document.createElement('tr'); r.className='category-row'; r.innerHTML=`<td>${esc(cat.name)}</td><td>${euro(cp)}</td><td>${euro(ca)}</td><td><span class="pill ${diff>=0?'ok':'bad'}">${euro(diff)}</span></td><td><button class="btn-ghost btn-mini" onclick="renameCategory('${cat.id}')">Rinomina</button> <button class="btn-danger btn-mini" onclick="deleteCategory('${cat.id}')">Elimina</button></td>`; els.budgetTableBody.appendChild(r); cat.subcategories.forEach(sub=>{const d=num(sub.planned)-num(sub.actual); const tr=document.createElement('tr'); tr.innerHTML=`<td class="subcategory-name">${esc(sub.name)}</td><td><input type="number" step="0.01" value="${num(sub.planned)}" onchange="updateSub('${cat.id}','${sub.id}','planned',this.value)"></td><td><input type="number" step="0.01" value="${num(sub.actual)}" onchange="updateSub('${cat.id}','${sub.id}','actual',this.value)"></td><td><span class="pill ${d>=0?'ok':'bad'}">${euro(d)}</span></td><td><button class="btn-ghost btn-mini" onclick="renameSub('${cat.id}','${sub.id}')">Rinomina</button> <button class="btn-danger btn-mini" onclick="deleteSub('${cat.id}','${sub.id}')">Elimina</button></td>`; els.budgetTableBody.appendChild(tr)})})}
-function renderExpenseSelectors(){const cats=monthData().categories; const oldCat=els.expenseCategory.value, oldSub=els.expenseSubcategory.value; els.expenseCategory.innerHTML=cats.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join(''); if(cats.some(c=>c.id===oldCat)) els.expenseCategory.value=oldCat; const cat=cats.find(c=>c.id===els.expenseCategory.value)||cats[0]; els.expenseSubcategory.innerHTML=(cat?.subcategories||[]).map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join(''); if(cat?.subcategories.some(s=>s.id===oldSub)) els.expenseSubcategory.value=oldSub}
-function renderExpenses(){els.expensesTableBody.innerHTML=''; (monthData().expenses||[]).forEach(e=>{const tr=document.createElement('tr'); tr.innerHTML=`<td>${esc(e.description)}</td><td>${euro(e.amount)}</td><td><span class="tag">${esc(e.categoryName)}</span></td><td><span class="tag">${esc(e.subcategoryName)}</span></td><td>${esc(e.note||'')}</td><td><button class="btn-danger btn-mini" onclick="deleteExpense('${e.id}')">Elimina</button></td>`; els.expensesTableBody.appendChild(tr)})}
-function renderTrackers(){const m=monthData(); const trackers=[['liquidity','Risparmi / Liquidità',num(m.allocations.liquidity),liquidityBalance()],['investments','Investimenti',num(m.allocations.investments),investmentsBalance()],['crypto','Crypto',num(m.allocations.crypto),cryptoBalance()]]; els.trackersContainer.innerHTML=''; trackers.forEach(([key,name,current,balance])=>{const card=document.createElement('div'); card.className='tracker-card'; card.innerHTML=`<div class="tracker-top"><h4>${name}</h4></div><div class="tracker-grid"><div class="field"><label>Versamento mese corrente</label><input type="number" step="0.01" value="${current}" onchange="updateTracker('${key}',this.value)"></div><div class="field"><label>Saldo attuale</label><input class="readonly" type="text" value="${euro(balance)}" disabled></div><div class="field"><label>Stato</label><input class="readonly" type="text" value="Aggiornamento automatico" disabled></div></div>`; els.trackersContainer.appendChild(card)})}
-function renderGoals(){const m=monthData(); els.goalsContainer.innerHTML=''; state.goals.forEach(g=>{if(!(g.id in m.allocations.goals)) m.allocations.goals[g.id]=0; const bal=goalBalance(g.id), pct=g.target>0?Math.min(Math.abs(bal)/num(g.target),1)*100:0; const card=document.createElement('div'); card.className='goal-card'; card.innerHTML=`<div class="goal-top"><h4>${esc(g.name)}</h4><div><button class="btn-ghost btn-mini" onclick="renameGoal('${g.id}')">Rinomina</button> <button class="btn-danger btn-mini" onclick="deleteGoal('${g.id}')">Elimina</button></div></div><div class="goal-grid"><div class="field"><label>Target</label><input type="number" step="0.01" value="${num(g.target)}" onchange="updateGoalTarget('${g.id}',this.value)"></div><div class="field"><label>Versamento mese corrente</label><input type="number" step="0.01" value="${num(m.allocations.goals[g.id])}" onchange="updateGoalAlloc('${g.id}',this.value)"></div><div class="field"><label>Saldo attuale</label><input class="readonly" type="text" value="${euro(bal)}" disabled></div></div><div class="progress"><div style="width:${pct}%"></div></div><div class="small" style="margin-top:8px">${euro(bal)} su ${euro(g.target)}</div>`; els.goalsContainer.appendChild(card)}); els.withdrawGoal.innerHTML=state.goals.map(g=>`<option value="${g.id}">${esc(g.name)}</option>`).join('')}
-function renderSummary(){const m=monthData(); const depGoals=state.goals.reduce((s,g)=>s+num(m.allocations.goals[g.id]),0); const witGoals=(m.withdrawals||[]).reduce((s,w)=>s+num(w.amount),0); const witCash=(m.cashWithdrawals||[]).reduce((s,w)=>s+num(w.amount),0); const rows=[['Accantonamenti versati',depGoals],['Prelievi da obiettivi',-witGoals],['Accantonamenti netti mese',depGoals-witGoals],['Risparmi / Liquidità versati',num(m.allocations.liquidity)],['Prelievi da risparmi',-witCash],['Risparmi / Liquidità netti mese',num(m.allocations.liquidity)-witCash],['Investimenti',num(m.allocations.investments)],['Crypto',num(m.allocations.crypto)]]; state.goals.forEach(g=>{const dep=num(m.allocations.goals[g.id]); const wit=(m.withdrawals||[]).filter(w=>w.goalId===g.id).reduce((s,w)=>s+num(w.amount),0); rows.push([`Obiettivo · ${g.name}`,dep-wit])}); rows.push(['Totale netto allocato questo mese',rows.slice(0,8).reduce((s,r)=>s+r[1],0)]); els.monthlySummary.innerHTML=rows.map(r=>`<tr><td>${esc(r[0])}</td><td style="text-align:right;font-weight:900">${euro(r[1])}</td></tr>`).join('')}
-function renderWithdrawals(){els.withdrawalsTableBody.innerHTML=''; (monthData().withdrawals||[]).forEach(w=>{const tr=document.createElement('tr'); tr.innerHTML=`<td>${esc(w.goalName)}</td><td>${euro(w.amount)}</td><td>${esc(w.note||'')}</td><td><button class="btn-danger btn-mini" onclick="deleteWithdrawal('${w.id}')">Elimina</button></td>`; els.withdrawalsTableBody.appendChild(tr)}); els.cashWithdrawTableBody.innerHTML=''; (monthData().cashWithdrawals||[]).forEach(w=>{const tr=document.createElement('tr'); tr.innerHTML=`<td>Risparmi / Liquidità</td><td>${euro(w.amount)}</td><td>${esc(w.note||'')}</td><td><button class="btn-danger btn-mini" onclick="deleteCashWithdrawal('${w.id}')">Elimina</button></td>`; els.cashWithdrawTableBody.appendChild(tr)})}
-function drawCharts(){const t=totals(); drawBudgetChart(t.byCat); drawWealthDonut({liquidity:t.liq,goals:t.acc,investments:t.inv,crypto:t.cry}); drawFlowChart({liquidity:num(monthData().allocations.liquidity),goals:state.goals.reduce((s,g)=>s+num(monthData().allocations.goals[g.id]),0),investments:num(monthData().allocations.investments),crypto:num(monthData().allocations.crypto)}); drawMonthlyStack(); drawMonthlyBalance()}
-function clearCanvas(id){const c=q(id),ctx=c.getContext('2d'); ctx.clearRect(0,0,c.width,c.height); return {c,ctx}}
-function drawBudgetChart(data){const {c,ctx}=clearCanvas('budgetChart'),w=c.width,h=c.height,left=210,right=30,top=18,bottom=18,ih=h-top-bottom,rowH=ih/Math.max(data.length,1),max=Math.max(1,...data.flatMap(d=>[d.planned,d.actual])); data.forEach((d,i)=>{const y=top+i*rowH+12; ctx.fillStyle='#0f172a'; ctx.font='bold 13px Inter'; ctx.fillText(d.name,20,y+18); ctx.fillStyle='#e2e8f0'; ctx.fillRect(left,y,w-left-right,11); ctx.fillRect(left,y+18,w-left-right,11); ctx.fillStyle='#2563eb'; ctx.fillRect(left,y,(w-left-right)*(d.planned/max),11); ctx.fillStyle='#16a34a'; ctx.fillRect(left,y+18,(w-left-right)*(d.actual/max),11)})}
-function drawWealthDonut(data){const {c,ctx}=clearCanvas('wealthChart'); const total=(data.liquidity+data.goals+data.investments+data.crypto)||1; const seg=[['Liquidità',data.liquidity,'#2563eb'],['Obiettivi',data.goals,'#93c5fd'],['Investimenti',data.investments,'#d97706'],['Crypto',data.crypto,'#7c3aed']]; const cx=240,cy=150,r=92,inner=54; let start=-Math.PI/2; seg.forEach(s=>{const ang=(s[1]/total)*Math.PI*2; ctx.beginPath(); ctx.moveTo(cx,cy); ctx.fillStyle=s[2]; ctx.arc(cx,cy,r,start,start+ang); ctx.closePath(); ctx.fill(); start+=ang}); ctx.beginPath(); ctx.fillStyle='#fff'; ctx.arc(cx,cy,inner,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#0f172a'; ctx.textAlign='center'; ctx.font='bold 16px Inter'; ctx.fillText('Totale',cx,cy-6); ctx.font='bold 14px Inter'; ctx.fillText(euro(total),cx,cy+18); ctx.textAlign='left'; let ly=72; seg.forEach(s=>{ctx.fillStyle=s[2]; ctx.fillRect(430,ly,16,16); ctx.fillStyle='#0f172a'; ctx.font='13px Inter'; ctx.fillText(`${s[0]}: ${euro(s[1])}`,454,ly+13); ly+=34})}
-function drawFlowChart(data){const {c,ctx}=clearCanvas('flowChart'),arr=[['Risparmi / Liquidità',data.liquidity,'#2563eb'],['Accantonamenti',data.goals,'#93c5fd'],['Investimenti',data.investments,'#d97706'],['Crypto',data.crypto,'#7c3aed']],w=c.width,h=c.height,left=220,right=40,top=20,bottom=20,max=Math.max(1,...arr.map(a=>Math.abs(a[1]))),ih=h-top-bottom,rowH=ih/arr.length; arr.forEach((a,i)=>{const y=top+i*rowH+18; ctx.fillStyle='#0f172a'; ctx.font='bold 13px Inter'; ctx.fillText(a[0],20,y+10); ctx.fillStyle='#e2e8f0'; ctx.fillRect(left,y,w-left-right,16); ctx.fillStyle=a[2]; ctx.fillRect(left,y,(w-left-right)*(Math.abs(a[1])/max),16); ctx.fillStyle='#0f172a'; ctx.fillText(euro(a[1]),Math.min(w-90,left+(w-left-right)*(Math.abs(a[1])/max)+8),y+13)})}
-function drawMonthlyStack(){const {c,ctx}=clearCanvas('monthlyStackChart'); const months=allMonths(); if(!months.length) return; const series=months.map(m=>({month:m,liquidity:num(state.budget[m].allocations.liquidity),goals:state.goals.reduce((s,g)=>s+num(state.budget[m].allocations.goals[g.id]),0),investments:num(state.budget[m].allocations.investments),crypto:num(state.budget[m].allocations.crypto)})); const max=Math.max(1,...series.map(s=>Math.abs(s.liquidity)+Math.abs(s.goals)+Math.abs(s.investments)+Math.abs(s.crypto))); const left=70,right=20,top=25,bottom=80,w=c.width-left-right,h=c.height-top-bottom,barW=w/Math.max(series.length,1)-20; series.forEach((s,i)=>{let x=left+i*(barW+20), y=top+h; [['#2563eb',s.liquidity],['#93c5fd',s.goals],['#d97706',s.investments],['#7c3aed',s.crypto]].forEach(p=>{const bh=h*(Math.abs(p[1])/max); y-=bh; ctx.fillStyle=p[0]; ctx.fillRect(x,y,barW,bh)}); ctx.fillStyle='#0f172a'; ctx.font='12px Inter'; ctx.fillText(s.month.slice(2),x,h+top+20)}); let lx=80, ly=c.height-28; [['Liquidità','#2563eb'],['Obiettivi','#93c5fd'],['Investimenti','#d97706'],['Crypto','#7c3aed']].forEach(p=>{ctx.fillStyle=p[1]; ctx.fillRect(lx,ly,14,10); ctx.fillStyle='#0f172a'; ctx.fillText(p[0],lx+20,ly+9); lx+=150})}
-function drawMonthlyBalance(){const {c,ctx}=clearCanvas('monthlyBalanceChart'); const months=allMonths(); if(!months.length) return; let liq=0, inv=0, cry=0, goalMap={}; state.goals.forEach(g=>goalMap[g.id]=0); const pts=[]; months.forEach(m=>{liq+=num(state.budget[m].allocations.liquidity)-(state.budget[m].cashWithdrawals||[]).reduce((s,w)=>s+num(w.amount),0); inv+=num(state.budget[m].allocations.investments); cry+=num(state.budget[m].allocations.crypto); state.goals.forEach(g=>{goalMap[g.id]+=num(state.budget[m].allocations.goals[g.id])-(state.budget[m].withdrawals||[]).filter(w=>w.goalId===g.id).reduce((s,w)=>s+num(w.amount),0)}); pts.push({month:m,liquidity:liq,goals:Object.values(goalMap).reduce((a,b)=>a+b,0),investments:inv,crypto:cry})}); const vals=pts.flatMap(p=>[p.liquidity,p.goals,p.investments,p.crypto]); const min=Math.min(0,...vals), max=Math.max(1,...vals), left=70,right=20,top=20,bottom=78,w=c.width-left-right,h=c.height-top-bottom, zeroY=top+h*((max)/(max-min||1)); ctx.strokeStyle='#94a3b8'; ctx.beginPath(); ctx.moveTo(left,zeroY); ctx.lineTo(c.width-right,zeroY); ctx.stroke(); function line(key,color){ctx.strokeStyle=color;ctx.lineWidth=3;ctx.beginPath(); pts.forEach((p,i)=>{const x=left+w*(i/Math.max(pts.length-1,1)), y=top+h*((max-p[key])/(max-min||1)); if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y)}); ctx.stroke(); pts.forEach((p,i)=>{const x=left+w*(i/Math.max(pts.length-1,1)), y=top+h*((max-p[key])/(max-min||1)); ctx.fillStyle=color; ctx.beginPath(); ctx.arc(x,y,3,0,Math.PI*2); ctx.fill(); if(key==='liquidity'){ctx.fillStyle='#0f172a'; ctx.font='11px Inter'; ctx.fillText(p.month.slice(2),x-12,h+top+18)}})} line('liquidity','#2563eb'); line('goals','#93c5fd'); line('investments','#d97706'); line('crypto','#7c3aed'); let lx=80,ly=c.height-30; [['Liquidità','#2563eb'],['Obiettivi','#93c5fd'],['Investimenti','#d97706'],['Crypto','#7c3aed']].forEach(p=>{ctx.fillStyle=p[1]; ctx.fillRect(lx,ly,14,10); ctx.fillStyle='#0f172a'; ctx.fillText(p[0],lx+20,ly+9); lx+=150})}
-window.updateSub=(catId,subId,field,val)=>{const c=monthData().categories.find(x=>x.id===catId), s=c?.subcategories.find(x=>x.id===subId); if(!s)return; s[field]=num(val); render()}
-window.renameCategory=(id)=>{const c=monthData().categories.find(x=>x.id===id); if(!c)return; const n=prompt('Nuovo nome categoria',c.name); if(n&&n.trim()){c.name=n.trim(); render()}}
-window.deleteCategory=(id)=>{if(!confirm('Eliminare categoria?')) return; monthData().categories=monthData().categories.filter(c=>c.id!==id); monthData().expenses=monthData().expenses.filter(e=>e.categoryId!==id); rebuildActuals(); render()}
-window.renameSub=(catId,subId)=>{const c=monthData().categories.find(x=>x.id===catId), s=c?.subcategories.find(x=>x.id===subId); if(!s)return; const n=prompt('Nuovo nome sottocategoria',s.name); if(n&&n.trim()){s.name=n.trim(); render()}}
-window.deleteSub=(catId,subId)=>{const c=monthData().categories.find(x=>x.id===catId); if(!c)return; c.subcategories=c.subcategories.filter(s=>s.id!==subId); monthData().expenses=monthData().expenses.filter(e=>e.subcategoryId!==subId); rebuildActuals(); render()}
-window.updateTracker=(key,val)=>{monthData().allocations[key]=num(val); render()}
-window.updateGoalTarget=(id,val)=>{const g=state.goals.find(x=>x.id===id); if(g){g.target=num(val); render()}}
-window.updateGoalAlloc=(id,val)=>{monthData().allocations.goals[id]=num(val); render()}
-window.renameGoal=(id)=>{const g=state.goals.find(x=>x.id===id); if(!g)return; const n=prompt('Nuovo nome obiettivo',g.name); if(n&&n.trim()){g.name=n.trim(); render()}}
-window.deleteGoal=(id)=>{state.goals=state.goals.filter(g=>g.id!==id); allMonths().forEach(m=>{delete state.budget[m].allocations.goals[id]; state.budget[m].withdrawals=(state.budget[m].withdrawals||[]).filter(w=>w.goalId!==id)}); render()}
-window.deleteExpense=(id)=>{monthData().expenses=monthData().expenses.filter(e=>e.id!==id); rebuildActuals(); render()}
-window.deleteWithdrawal=(id)=>{monthData().withdrawals=monthData().withdrawals.filter(w=>w.id!==id); render()}
-window.deleteCashWithdrawal=(id)=>{monthData().cashWithdrawals=monthData().cashWithdrawals.filter(w=>w.id!==id); render()}
-function addCategory(){const n=prompt('Nome categoria'); if(!n||!n.trim()) return; const cat={id:uid(),name:n.trim(),subcategories:[]}; monthData().categories.push(cat); propagateCategoryForward(cat); render()}
-function addSubcategory(){const cats=monthData().categories; if(!cats.length) return alert('Crea prima una categoria.'); const list=cats.map((c,i)=>`${i+1}. ${c.name}`).join('\n'); const idx=parseInt(prompt(`Seleziona il numero della categoria in cui vuoi inserire la sottocategoria:\n${list}`),10)-1; if(!cats[idx]) return; const cat=cats[idx]; const n=prompt(`Nome sottocategoria per: ${cat.name}`); if(!n||!n.trim()) return; const sub={id:uid(),name:n.trim(),planned:0,actual:0}; cat.subcategories.push(sub); propagateSubForward(cat.id,sub); render(); els.expenseCategory.value=cat.id; renderExpenseSelectors(); els.expenseSubcategory.value=sub.id}
-function addGoal(){const n=prompt('Nome obiettivo','Nuovo obiettivo'); if(!n||!n.trim()) return; const g={id:uid(),name:n.trim(),target:0}; state.goals.push(g); allMonths().forEach(m=>state.budget[m].allocations.goals[g.id]=0); monthData().allocations.goals[g.id]=0; render()}
-function addExpense(){const d=els.expenseDescription.value.trim(), a=num(els.expenseAmount.value), catId=els.expenseCategory.value, subId=els.expenseSubcategory.value, note=els.expenseNote.value.trim(); const cat=monthData().categories.find(c=>c.id===catId); const sub=cat?.subcategories.find(s=>s.id===subId); if(!d) return alert('Inserisci la spesa'); if(!cat||!sub) return alert('Seleziona categoria e sottocategoria valide'); if(a<=0) return alert('Inserisci un importo valido'); monthData().expenses.unshift({id:uid(),description:d,amount:a,categoryId:catId,subcategoryId:subId,categoryName:cat.name,subcategoryName:sub.name,note}); rebuildActuals(); els.expenseDescription.value=''; els.expenseAmount.value=''; els.expenseNote.value=''; render()}
-function addGoalWithdrawal(){const goalId=els.withdrawGoal.value, amount=num(els.withdrawAmount.value), note=els.withdrawNote.value.trim(); const g=state.goals.find(x=>x.id===goalId); if(!g) return; monthData().withdrawals.unshift({id:uid(),goalId,goalName:g.name,amount,note}); els.withdrawAmount.value=''; els.withdrawNote.value=''; render()}
-function addCashWithdrawal(){const amount=num(els.cashWithdrawAmount.value), note=els.cashWithdrawNote.value.trim(); monthData().cashWithdrawals.unshift({id:uid(),amount,note}); els.cashWithdrawAmount.value=''; els.cashWithdrawNote.value=''; render()}
-function resetMonth(){const old=monthData(); const fresh=defaultMonth(); fresh.categories=clone(old.categories).map(c=>({...c,subcategories:c.subcategories.map(s=>({...s,actual:0}))})); state.goals.forEach(g=>fresh.allocations.goals[g.id]=0); state.budget[currentMonthKey()]=fresh; render()}
-function setPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active')); q('page-'+p).classList.add('active'); document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.page===p))}
-function bind(){document.querySelectorAll('.nav-btn').forEach(b=>b.addEventListener('click',()=>setPage(b.dataset.page))); q('btnSave').addEventListener('click',()=>{save(); alert('Dati salvati nel browser.')}); q('btnExport').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=`budget-finanza-${currentMonthKey()}.json`; a.click(); URL.revokeObjectURL(url)}); q('btnImport').addEventListener('click',()=>q('importFile').click()); q('importFile').addEventListener('change',e=>{const f=e.target.files?.[0]; if(!f) return; const r=new FileReader(); r.onload=()=>{state=JSON.parse(r.result); ensureMonth(currentMonthKey()); render()}; r.readAsText(f)}); q('btnResetMonth').addEventListener('click',resetMonth); q('addCategoryBtn').addEventListener('click',addCategory); q('addSubcategoryBtn').addEventListener('click',addSubcategory); q('addGoalBtn').addEventListener('click',addGoal); q('addExpenseBtn').addEventListener('click',addExpense); q('addWithdrawBtn').addEventListener('click',addGoalWithdrawal); q('addCashWithdrawBtn').addEventListener('click',addCashWithdrawal); els.expenseCategory.addEventListener('change',()=>{const cat=monthData().categories.find(c=>c.id===els.expenseCategory.value)||monthData().categories[0]; els.expenseSubcategory.innerHTML=(cat?.subcategories||[]).map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join('')}); els.monthSelect.addEventListener('change',()=>{ensureMonth(currentMonthKey()); render()}); els.salaryInput.addEventListener('change',e=>{monthData().stipendio=num(e.target.value); render()}); els.extraIncomeInput.addEventListener('change',e=>{monthData().entrateExtra=num(e.target.value); render()}); els.carryOverInput.addEventListener('change',e=>{monthData().avanzoPrecedente=num(e.target.value); render()})}
-async function init(){
-  state = await load();
-  els.monthSelect.value=todayMonth();
-  ensureMonth(currentMonthKey());
-  bind();
+
+let data = JSON.parse(localStorage.getItem("budget")) || {
+  salary:0,
+  extra:0,
+  expenses:[]
+};
+
+function saveData(){
+  data.salary = Number(document.getElementById("salary").value);
+  data.extra = Number(document.getElementById("extra").value);
+
+  save();
   render();
 }
-init();
+
+function addExpense(){
+  const desc = document.getElementById("desc").value;
+  const amount = Number(document.getElementById("amount").value);
+
+  if(!desc || amount<=0) return;
+
+  data.expenses.push({desc,amount});
+
+  document.getElementById("desc").value="";
+  document.getElementById("amount").value="";
+
+  save();
+  render();
+}
+
+function deleteExpense(i){
+  data.expenses.splice(i,1);
+  save();
+  render();
+}
+
+function save(){
+  localStorage.setItem("budget", JSON.stringify(data));
+}
+
+function render(){
+
+  document.getElementById("salary").value = data.salary;
+  document.getElementById("extra").value = data.extra;
+
+  let totalExpenses = data.expenses.reduce((s,e)=>s+e.amount,0);
+  let income = data.salary + data.extra;
+  let remaining = income - totalExpenses;
+
+  document.getElementById("income").innerText = income;
+  document.getElementById("expenses").innerText = totalExpenses;
+  document.getElementById("remaining").innerText = remaining;
+
+  let html="";
+  data.expenses.forEach((e,i)=>{
+    html += `
+      <tr>
+        <td>${e.desc}</td>
+        <td>${e.amount}</td>
+        <td><button onclick="deleteExpense(${i})">X</button></td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("table").innerHTML = html;
+}
+
+render();
+
 </script>
+
 </body>
 </html>
