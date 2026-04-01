@@ -40,8 +40,14 @@ function todayMonth(){const d=new Date();return `${d.getFullYear()}-${String(d.g
 const defaultMonth=()=>({stipendio:0,entrateExtra:0,avanzoPrecedente:0,categories:[{id:uid(),name:'Alimentazione',subcategories:[{id:uid(),name:'Spesa',planned:0,actual:0},{id:uid(),name:'Pizza / cene',planned:0,actual:0}]},{id:uid(),name:'Trasporti',subcategories:[{id:uid(),name:'Benzina',planned:0,actual:0},{id:uid(),name:'Auto',planned:0,actual:0}]},{id:uid(),name:'Tempo libero',subcategories:[{id:uid(),name:'Uscite',planned:0,actual:0},{id:uid(),name:'Sport',planned:0,actual:0}]}],expenses:[],allocations:{liquidity:0,investments:0,crypto:0,goals:{}},withdrawals:[],cashWithdrawals:[]})
 const defaultState={budget:{},goals:[{id:uid(),name:'Fondo macchina',target:10000},{id:uid(),name:'Altro obiettivo',target:3000}]}
 async function load(){
-  try {
-    const res = await fetch('/api/state');
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if(!raw) return clone(defaultState);
+  try{
+    return JSON.parse(raw)
+  }catch{
+    return clone(defaultState)
+  }
+}
     if (res.ok) {
       const data = await res.json();
       if (data && Object.keys(data).length) return data;
@@ -54,13 +60,8 @@ async function load(){
 let state;
 const els={monthSelect:q('monthSelect'),salaryInput:q('salaryInput'),extraIncomeInput:q('extraIncomeInput'),carryOverInput:q('carryOverInput'),summaryAcc:q('summaryAcc'),summarySav:q('summarySav'),summaryInv:q('summaryInv'),summaryCry:q('summaryCry'),summaryNet:q('summaryNet'),incomeTotal:q('incomeTotal'),plannedTotal:q('plannedTotal'),remainingTotal:q('remainingTotal'),actualTotal:q('actualTotal'),budgetTableBody:q('budgetTableBody'),expenseDescription:q('expenseDescription'),expenseAmount:q('expenseAmount'),expenseCategory:q('expenseCategory'),expenseSubcategory:q('expenseSubcategory'),expenseNote:q('expenseNote'),expensesTableBody:q('expensesTableBody'),trackersContainer:q('trackersContainer'),goalsContainer:q('goalsContainer'),monthlySummary:q('monthlySummary'),withdrawGoal:q('withdrawGoal'),withdrawAmount:q('withdrawAmount'),withdrawNote:q('withdrawNote'),withdrawalsTableBody:q('withdrawalsTableBody'),cashWithdrawAmount:q('cashWithdrawAmount'),cashWithdrawNote:q('cashWithdrawNote'),cashWithdrawTableBody:q('cashWithdrawTableBody')};
 function save(){
-  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}catch(e){}
   try{
-    fetch('/api/state',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(state)
-    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
   }catch(e){}
 }
 function allMonths(){return Object.keys(state.budget).sort()}
